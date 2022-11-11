@@ -1,8 +1,10 @@
 import nltk
 import numpy
+import matplotlib as mpl
+mpl.use('tkagg')
 import matplotlib.pyplot as plt
 
-with open("/Users/miguel/Desktop/data_from_pubmed.txt","r") as file:
+with open("data_from_pubmed.txt","r" ,encoding='utf-8') as file:
     raw_papers = file.read().replace('\n', '') #opens the .txt file and converted in a string format
 
 from nltk.tokenize import word_tokenize
@@ -11,6 +13,7 @@ fn_dt = nltk.Text(token_words) #tokenize all the words in file for further ooccu
 
 target_words = ['cancer', 'acetylation', 'leukemia'] #set the target word for the dispersion plot
 
-plt.figure(figsize=(20, 8)) #defines the size of the plot
-fn_dt.dispersion_plot(target_words)
-plt.savefig('a.svg') #saves the plot as a .svg file
+plt.figure(figsize=(30, 12), dpi=200) #defines the size and resolution of the plot
+word_plot = fn_dt.dispersion_plot(target_words)
+plt.plot(word_plot)
+plt.show() #shows the plot
